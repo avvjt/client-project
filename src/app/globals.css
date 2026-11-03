@@ -1,0 +1,892 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Dispo-Concept brand tokens (semantic usage only — do not hardcode raw hex) */
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-navy-2: var(--brand-navy-2);
+  --color-brand-engineering: var(--brand-engineering);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-teal-signal: var(--brand-teal-signal);
+  --color-brand-teal-pale: var(--brand-teal-pale);
+  --color-brand-steel: var(--brand-steel);
+  --color-brand-graphite: var(--brand-graphite);
+  --color-brand-champagne: var(--brand-champagne);
+  --color-brand-swiss: var(--brand-swiss);
+  --color-glass: var(--glass-bg);
+  --color-glass-strong: var(--glass-bg-strong);
+  --color-glass-border: var(--glass-border);
+
+  /* Typography */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-manrope), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/*
+ * DISPO-CONCEPT DESIGN TOKENS — LIGHT (clinical)
+ * Brand palette: Midnight Navy #0B1726 · Deep Navy #14283D · Engineering Blue #243D54
+ * Clinical Teal #087E8B · Signal Teal #11A6A0 · Pale Teal #73D8CD
+ * Clinical Background #F5F8FA · Border #E4EBF0 · Steel #66788A · Graphite #344454
+ * Champagne Titanium #B89A62 (accents only)
+ */
+:root {
+  --radius: 0.5rem;
+  --background: #f5f8fa;
+  --foreground: #0b1726;
+  --card: #ffffff;
+  --card-foreground: #0b1726;
+  --popover: #ffffff;
+  --popover-foreground: #0b1726;
+  --primary: #087e8b;
+  --primary-foreground: #ffffff;
+  --secondary: #e9f0f4;
+  --secondary-foreground: #14283d;
+  --muted: #edf2f6;
+  --muted-foreground: #52616f;
+  --accent: #e2f1f0;
+  --accent-foreground: #075e66;
+  --destructive: #b42318;
+  --destructive-foreground: #ffffff;
+  --success: #1f7a4d;
+  --border: #e4ebf0;
+  --input: #d5e0e8;
+  --ring: #11a6a0;
+  --chart-1: #087e8b;
+  --chart-2: #11a6a0;
+  --chart-3: #243d54;
+  --chart-4: #73d8cd;
+  --chart-5: #b89a62;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0b1726;
+  --sidebar-primary: #087e8b;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e9f0f4;
+  --sidebar-accent-foreground: #14283d;
+  --sidebar-border: #e4ebf0;
+  --sidebar-ring: #11a6a0;
+
+  --brand-navy: #0b1726;
+  --brand-navy-2: #14283d;
+  --brand-engineering: #243d54;
+  --brand-teal: #087e8b;
+  --brand-teal-signal: #11a6a0;
+  --brand-teal-pale: #73d8cd;
+  --brand-steel: #66788a;
+  --brand-graphite: #344454;
+  --brand-champagne: #b89a62;
+
+  /* Swiss-standard trust accent — used ONLY for precision seals, verification
+     marks and Swiss-method signifiers. Never for decorative UI. */
+  --brand-swiss: #da291c;
+
+  /* Glass morphism system (light theme) */
+  --glass-bg: rgba(255, 255, 255, 0.42);
+  --glass-bg-strong: rgba(255, 255, 255, 0.62);
+  --glass-border: rgba(255, 255, 255, 0.65);
+  --glass-highlight: rgba(255, 255, 255, 0.85);
+  --glass-shadow: 0 24px 60px -28px rgba(11, 23, 38, 0.35);
+}
+
+/* DISPO-CONCEPT DESIGN TOKENS — DARK (midnight navy) */
+.dark {
+  --background: #0b1726;
+  --foreground: #eaf1f5;
+  --card: #14283d;
+  --card-foreground: #eaf1f5;
+  --popover: #14283d;
+  --popover-foreground: #eaf1f5;
+  --primary: #17b0a9;
+  --primary-foreground: #04211f;
+  --secondary: #1b3049;
+  --secondary-foreground: #eaf1f5;
+  --muted: #16293f;
+  --muted-foreground: #97a9b8;
+  --accent: #14323b;
+  --accent-foreground: #9adfd8;
+  --destructive: #e5484d;
+  --destructive-foreground: #ffffff;
+  --success: #46b981;
+  --border: #22354a;
+  --input: #2a3e55;
+  --ring: #2bbfb7;
+  --chart-1: #11a6a0;
+  --chart-2: #73d8cd;
+  --chart-3: #5a7d9c;
+  --chart-4: #b89a62;
+  --chart-5: #8fe3db;
+  --sidebar: #14283d;
+  --sidebar-foreground: #eaf1f5;
+  --sidebar-primary: #17b0a9;
+  --sidebar-primary-foreground: #04211f;
+  --sidebar-accent: #1b3049;
+  --sidebar-accent-foreground: #eaf1f5;
+  --sidebar-border: #22354a;
+  --sidebar-ring: #2bbfb7;
+
+  --brand-navy: #0b1726;
+  --brand-navy-2: #14283d;
+  --brand-engineering: #243d54;
+  --brand-teal: #17b0a9;
+  --brand-teal-signal: #2bbfb7;
+  --brand-teal-pale: #73d8cd;
+  --brand-steel: #8ba0b2;
+  --brand-graphite: #a8b8c6;
+  --brand-champagne: #cbb078;
+  --brand-swiss: #f0574a;
+
+  /* Glass morphism system (dark theme) */
+  --glass-bg: rgba(20, 40, 61, 0.4);
+  --glass-bg-strong: rgba(27, 48, 73, 0.58);
+  --glass-border: rgba(115, 216, 205, 0.2);
+  --glass-highlight: rgba(233, 241, 245, 0.12);
+  --glass-shadow: 0 28px 64px -24px rgba(0, 0, 0, 0.55);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01" on, "cv05" on;
+    text-rendering: optimizeLegibility;
+  }
+  /* Arabic typography: Noto Sans Arabic takes over for RTL content */
+  html[lang="ar"] body {
+    font-family: var(--font-noto-arabic), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  }
+  html[lang="ar"] .font-display {
+    font-family: var(--font-noto-arabic), var(--font-manrope), ui-sans-serif, sans-serif;
+  }
+  /* Simplified Chinese typography: Noto Sans SC takes over for zh content */
+  html[lang="zh"] body {
+    font-family: var(--font-noto-sc), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  }
+  html[lang="zh"] .font-display {
+    font-family: var(--font-noto-sc), var(--font-manrope), ui-sans-serif, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-manrope), var(--font-inter), ui-sans-serif, sans-serif;
+    letter-spacing: -0.01em;
+  }
+  html[lang="ar"] h1,
+  html[lang="ar"] h2,
+  html[lang="ar"] h3,
+  html[lang="ar"] h4,
+  html[lang="ar"] h5,
+  html[lang="ar"] h6 {
+    font-family: var(--font-noto-arabic), var(--font-manrope), ui-sans-serif, sans-serif;
+    letter-spacing: 0;
+  }
+  html[lang="zh"] h1,
+  html[lang="zh"] h2,
+  html[lang="zh"] h3,
+  html[lang="zh"] h4,
+  html[lang="zh"] h5,
+  html[lang="zh"] h6 {
+    font-family: var(--font-noto-sc), var(--font-manrope), ui-sans-serif, sans-serif;
+    letter-spacing: 0.01em;
+  }
+}
+
+@layer utilities {
+  /* Cinematic hero drift — subtle zoom/pan for approved imagery */
+  @keyframes kenburns {
+    0% {
+      transform: scale(1) translate(0, 0);
+    }
+    100% {
+      transform: scale(1.07) translate(-1.5%, 1%);
+    }
+  }
+  /* Cinematic carousel progress — active frame's dwell timer */
+  @keyframes carousel-fill {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  /* Immersive hero — ECG pulse line drawing itself across the frame */
+  @keyframes ecg-run {
+    from {
+      stroke-dashoffset: 1200;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  /* Immersive hero — travelling glow dot on the pulse line */
+  @keyframes ecg-dot {
+    0% {
+      offset-distance: 0%;
+      opacity: 0;
+    }
+    6% {
+      opacity: 1;
+    }
+    94% {
+      opacity: 1;
+    }
+    100% {
+      offset-distance: 100%;
+      opacity: 0;
+    }
+  }
+  /* Immersive hero — slow HUD rotation of the precision ring */
+  @keyframes seal-rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  /* Dispo Inteligent launcher — soft Swiss-red aura pulse */
+  @keyframes chat-glow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0 0 rgba(218, 41, 28, 0.35),
+        0 10px 30px rgba(11, 23, 38, 0.45);
+    }
+    50% {
+      box-shadow:
+        0 0 0 10px rgba(218, 41, 28, 0),
+        0 10px 30px rgba(11, 23, 38, 0.45);
+    }
+  }
+  /* Corridor map — flowing shipment dashes along the arcs */
+  @keyframes dashflow {
+    to {
+      stroke-dashoffset: -9;
+    }
+  }
+  /* Corridor map — rotating radar sweep */
+  @keyframes radar {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  /* Corridor ticker — content duplicated 2×, translate -50% = seamless loop */
+  @keyframes ticker {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  html[dir="rtl"] .animate-\[ticker_42s_linear_infinite\] {
+    animation-direction: reverse;
+  }
+  /* Fluid display typography */
+  .text-fluid-hero {
+    font-size: clamp(2rem, 1.2rem + 3.2vw, 3.5rem);
+    line-height: 1.08;
+  }
+  .text-fluid-h2 {
+    font-size: clamp(1.5rem, 1.15rem + 1.4vw, 2.125rem);
+    line-height: 1.18;
+  }
+  .text-fluid-h3 {
+    font-size: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+    line-height: 1.3;
+  }
+  /* Technical value styling */
+  .tech-value {
+    font-family: var(--font-plex-mono), ui-monospace, monospace;
+    font-size: 0.8125em;
+    letter-spacing: 0.01em;
+  }
+  /* ── Depth-of-field float system — three focal planes ───────────────
+     far (large, heavy blur, slowest) · mid (soft blur) · near (crisp).
+     All are disabled by the global prefers-reduced-motion rule above. */
+  @keyframes float-a {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate3d(0, -16px, 0) rotate(2.5deg);
+    }
+  }
+  @keyframes float-b {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate3d(12px, -10px, 0) rotate(-3deg);
+    }
+  }
+  @keyframes float-c {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(-10px, -14px, 0) scale(1.04);
+    }
+  }
+  .animate-float-a {
+    animation: float-a 11s ease-in-out infinite;
+  }
+  .animate-float-b {
+    animation: float-b 9s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+  .animate-float-c {
+    animation: float-c 13s ease-in-out infinite;
+    animation-delay: -6s;
+  }
+
+  /* ── Glass morphism system ────────────────────────────────────────────
+     .glass-panel  — hero-grade translucent pane with gradient sheen
+     .glass-card   — reusable translucent surface for cards/chips
+     .glass-chip   — small floating badge on glass                      */
+  .glass-panel {
+    position: relative;
+    background: linear-gradient(
+      135deg,
+      var(--glass-bg-strong),
+      var(--glass-bg) 55%,
+      color-mix(in srgb, var(--brand-teal) 8%, var(--glass-bg))
+    );
+    backdrop-filter: blur(22px) saturate(1.45);
+    -webkit-backdrop-filter: blur(22px) saturate(1.45);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      var(--glass-shadow),
+      inset 0 1px 0 0 var(--glass-highlight);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  /* Moving specular highlight — the “light sweep” that sells the glass */
+  .glass-panel::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(
+      115deg,
+      transparent 32%,
+      color-mix(in srgb, var(--glass-highlight) 32%, transparent) 45%,
+      transparent 58%
+    );
+    background-size: 260% 260%;
+    animation: sheen 10s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes sheen {
+    0%,
+    100% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+  }
+  .glass-card {
+    background: linear-gradient(150deg, var(--glass-bg-strong), var(--glass-bg));
+    backdrop-filter: blur(14px) saturate(1.3);
+    -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      var(--glass-shadow),
+      inset 0 1px 0 0 var(--glass-highlight);
+  }
+  .glass-chip {
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(10px) saturate(1.3);
+    -webkit-backdrop-filter: blur(10px) saturate(1.3);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 0 var(--glass-highlight);
+  }
+  /* Hero glass stays deep-navy in BOTH themes — the hero band is always
+     midnight navy, and light-theme glass over navy would destroy the
+     contrast of white hero text. These modifiers re-anchor the glass
+     variables on a dark baseline. */
+  .glass-dark {
+    --glass-bg: rgba(20, 40, 61, 0.38);
+    --glass-bg-strong: rgba(27, 48, 73, 0.52);
+    --glass-border: rgba(115, 216, 205, 0.22);
+    --glass-highlight: rgba(233, 241, 245, 0.14);
+    --glass-shadow: 0 30px 70px -28px rgba(0, 0, 0, 0.6);
+  }
+  .glass-dark-strong {
+    --glass-bg: rgba(16, 31, 48, 0.55);
+    --glass-bg-strong: rgba(20, 40, 61, 0.72);
+    --glass-border: rgba(115, 216, 205, 0.26);
+    --glass-highlight: rgba(233, 241, 245, 0.16);
+    --glass-shadow: 0 24px 54px -26px rgba(0, 0, 0, 0.65);
+  }
+  /* Edge glow for hero glass — teal light leaking around the pane */
+  .glass-edge-glow {
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      130deg,
+      color-mix(in srgb, var(--brand-teal-pale) 55%, transparent),
+      transparent 30%,
+      transparent 70%,
+      color-mix(in srgb, var(--brand-champagne) 40%, transparent)
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* ── Liquid glass (from liquid-glass-studio study) ────────────────────
+     Higher-order glass: a clear-ish centre with an optically denser edge
+     ring — the refraction band Apple's liquid glass reads by — plus a
+     specular rim and a faint on-brand chromatic fringe (champagne/teal,
+     never rainbow). Static by nature: no motion, so no reduced-motion
+     gating needed. Degrades to the flat glass look without backdrop-filter.
+     .liquid-glass       — theme-aware liquid surface
+     .liquid-glass-dark  — pins the navy baseline (always-dark panels)      */
+  /* NOTE: no `position` here on purpose — this class must never override a
+     positioning utility on the consuming element (fixed/absolute/relative).
+     The ::before/::after layers anchor to the consumer, which must be
+     positioned (fixed, sticky, absolute or relative). */
+  .liquid-glass {
+    isolation: isolate;
+    background: linear-gradient(150deg, var(--glass-bg-strong), var(--glass-bg) 60%);
+    backdrop-filter: blur(18px) saturate(1.55) brightness(1.03);
+    -webkit-backdrop-filter: blur(18px) saturate(1.55) brightness(1.03);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      var(--glass-shadow),
+      inset 0 1px 0 0 var(--glass-highlight);
+  }
+  /* Refraction band — the rim blurs harder than the centre, as if the
+     panel were a moulded lens. Masked via the content-box xor trick. */
+  .liquid-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    padding: 14px;
+    backdrop-filter: blur(7px) saturate(1.25) brightness(1.06);
+    -webkit-backdrop-filter: blur(7px) saturate(1.25) brightness(1.06);
+    background: linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--glass-highlight) 26%, transparent),
+      transparent 38%,
+      transparent 66%,
+      color-mix(in srgb, var(--glass-highlight) 16%, transparent)
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  /* Specular rim with a faint chromatic split — champagne warms one side,
+     teal cools the other; both at whisper opacity. */
+  .liquid-glass::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: 2;
+    border-radius: inherit;
+    padding: 1.2px;
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--brand-champagne) 42%, transparent),
+      color-mix(in srgb, var(--glass-highlight) 30%, transparent) 28%,
+      transparent 50%,
+      color-mix(in srgb, var(--brand-teal-pale) 34%, transparent) 78%,
+      color-mix(in srgb, var(--brand-champagne) 30%, transparent)
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .liquid-glass-dark {
+    --glass-bg: rgba(18, 36, 56, 0.6);
+    --glass-bg-strong: rgba(24, 44, 68, 0.74);
+    --glass-border: rgba(115, 216, 205, 0.24);
+    --glass-highlight: rgba(233, 241, 245, 0.15);
+    --glass-shadow: 0 30px 70px -26px rgba(0, 0, 0, 0.62);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .liquid-glass {
+      background: var(--glass-bg-strong);
+    }
+    .liquid-glass::before {
+      display: none;
+    }
+  }
+
+  /* ── Fluted (reeded) glass morph ─────────────────────────────────────
+     Vertical glass ribs with a slow specular sweep — the "Orientation"
+     vitals carry their text on fluted glass panels. Content stays above
+     the ribs (negative z-index children paint over the panel background,
+     below the text) and contrast is anchored on an ~85% opaque card base. */
+  .fluted-glass {
+    position: relative;
+    isolation: isolate;
+    background: linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--card) 92%, transparent),
+      color-mix(in srgb, var(--card) 74%, transparent) 55%,
+      color-mix(in srgb, var(--card) 88%, transparent)
+    );
+    backdrop-filter: blur(12px) saturate(1.25);
+    -webkit-backdrop-filter: blur(12px) saturate(1.25);
+    border: 1px solid color-mix(in srgb, var(--border) 92%, transparent);
+    box-shadow:
+      0 18px 40px -30px rgba(11, 23, 38, 0.35),
+      inset 0 1px 0 color-mix(in srgb, white 60%, transparent);
+    overflow: hidden;
+  }
+  /* The flutes — narrow vertical ribs of light */
+  .fluted-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, white 42%, transparent) 0px,
+      transparent 2px,
+      transparent 11px,
+      color-mix(in srgb, white 10%, transparent) 13px,
+      color-mix(in srgb, white 34%, transparent) 14px,
+      transparent 16px
+    );
+    opacity: 0.4;
+  }
+  /* Slow specular sweep travelling across the flutes */
+  .fluted-glass::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(
+      115deg,
+      transparent 30%,
+      color-mix(in srgb, white 26%, transparent) 47%,
+      transparent 60%
+    );
+    background-size: 240% 240%;
+    animation: sheen 9s ease-in-out infinite;
+  }
+
+  /* ── Red glow hover — product tabs & catalogue cards ─────────────────
+     A Swiss-red bloom rises inside the tab background on hover/focus. */
+  .tab-glow-red {
+    transition-property: color, background-color, border-color, box-shadow, transform;
+    transition-duration: 300ms;
+    transition-timing-function: ease;
+  }
+  .tab-glow-red:hover,
+  .tab-glow-red:focus-visible {
+    border-color: color-mix(in srgb, var(--brand-swiss) 55%, transparent);
+    background-color: color-mix(in srgb, var(--brand-swiss) 9%, var(--card));
+    color: var(--foreground);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--brand-swiss) 26%, transparent),
+      0 0 26px -4px color-mix(in srgb, var(--brand-swiss) 58%, transparent),
+      inset 0 0 18px -8px color-mix(in srgb, var(--brand-swiss) 50%, transparent);
+  }
+
+  /* ── Medical flip navigation ──────────────────────────────────────────
+     The header speaks the house vocabulary: each item rests on its
+     medical-themed alias ("Repertoire") and performs a card-flip to the
+     plain word ("Products") when the mouse moves over it or selects it.
+     A one-line ECG trace draws itself beneath the word — the medical
+     element that powers the flip. Selection pins the flip and turns the
+     title Swiss red, uniformly across all nine destinations. */
+  .nav-link {
+    position: relative;
+  }
+  .nav-flip {
+    position: relative;
+    display: inline-grid;
+    perspective: 480px;
+    vertical-align: middle;
+  }
+  .nav-flip-inner {
+    grid-area: 1 / 1;
+    display: grid;
+    justify-items: center;
+    transform-style: preserve-3d;
+    transition: transform 460ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .nav-face {
+    grid-area: 1 / 1;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    white-space: nowrap;
+  }
+  .nav-face-alias {
+    transition: color 280ms ease;
+  }
+  .nav-face-real {
+    transform: rotateX(180deg);
+    color: var(--brand-swiss);
+  }
+  .nav-link:hover .nav-flip-inner,
+  .nav-link:focus-visible .nav-flip-inner,
+  .nav-link[data-active="true"] .nav-flip-inner {
+    transform: rotateX(180deg);
+  }
+  .nav-link:hover .nav-face-alias,
+  .nav-link:focus-visible .nav-face-alias,
+  .nav-link[data-active="true"] .nav-face-alias {
+    color: var(--brand-swiss);
+  }
+  /* ECG trace — draws left-to-right on hover/selection, visible when active */
+  .ecg-trace {
+    position: absolute;
+    inset-inline: -6%;
+    bottom: -7px;
+    width: 112%;
+    color: var(--brand-swiss);
+    opacity: 0;
+    transition: opacity 200ms ease;
+    pointer-events: none;
+  }
+  html[dir="rtl"] .ecg-trace {
+    transform: scaleX(-1);
+  }
+  .ecg-path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 620ms ease 60ms;
+  }
+  .nav-link:hover .ecg-trace,
+  .nav-link:focus-visible .ecg-trace,
+  .nav-link[data-active="true"] .ecg-trace {
+    opacity: 1;
+  }
+  .nav-link:hover .ecg-path,
+  .nav-link:focus-visible .ecg-path,
+  .nav-link[data-active="true"] .ecg-path {
+    stroke-dashoffset: 0;
+  }
+  /* Reduced motion — no 3D rotation, instant crossfade swap */
+  @media (prefers-reduced-motion: reduce) {
+    .nav-flip-inner {
+      transition: none;
+      transform: none;
+    }
+    .nav-face-real {
+      transform: none;
+      opacity: 0;
+      transition: opacity 150ms ease;
+    }
+    .nav-face-alias {
+      transition: opacity 150ms ease;
+    }
+    .nav-link:hover .nav-face-alias,
+    .nav-link:focus-visible .nav-face-alias,
+    .nav-link[data-active="true"] .nav-face-alias {
+      opacity: 0;
+    }
+    .nav-link:hover .nav-face-real,
+    .nav-link:focus-visible .nav-face-real,
+    .nav-link[data-active="true"] .nav-face-real {
+      opacity: 1;
+    }
+    .ecg-path {
+      transition: none;
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Fine grid/annotation lines for the industrial aesthetic */
+  .bg-blueprint {
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--brand-teal) 7%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--brand-teal) 7%, transparent) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .bg-blueprint-dark {
+    background-image:
+      linear-gradient(to right, rgba(115, 216, 205, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(115, 216, 205, 0.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  /* Custom scrollbar for long technical lists/tables */
+  .scroll-slim {
+    scrollbar-width: thin;
+    scrollbar-color: var(--input) transparent;
+  }
+  .scroll-slim::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scroll-slim::-webkit-scrollbar-thumb {
+    background: var(--input);
+    border-radius: 999px;
+  }
+  .scroll-slim::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   COPYRIGHT PROTECTION (site-wide) — see copy-protection.tsx
+   - Selection of static content disabled; editable fields, contenteditable
+     and [data-allow-copy] elements (published contact lines) stay native.
+   - Printed output is replaced by a copyright notice.
+   ═══════════════════════════════════════════════════════════════════ */
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+body input,
+body textarea,
+body select,
+body [contenteditable="true"],
+body [contenteditable=""],
+body [data-allow-copy],
+body [data-allow-copy] * {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  user-select: text;
+}
+
+/* Print guard — the notice element is rendered by <CopyProtection /> (nested
+   anywhere in the shell, so visibility rules are used instead of display on
+   direct body children). */
+.print-notice {
+  display: none;
+}
+@media print {
+  body *:not(.print-notice):not(.print-notice *) {
+    visibility: hidden !important;
+  }
+  .print-notice {
+    display: block !important;
+    visibility: visible !important;
+    position: fixed;
+    inset: 0;
+    background: #ffffff;
+    padding: 64px 32px;
+    font-family: var(--font-inter), sans-serif;
+    color: #0b1726;
+  }
+  .print-notice-brand {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    margin-bottom: 12px;
+  }
+  .print-notice-body {
+    font-size: 13px;
+    line-height: 1.7;
+    max-width: 60ch;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   HEADER — page-title locator chip (re-animates on route change)
+   ═══════════════════════════════════════════════════════════════════ */
+.page-title-chip {
+  animation: chip-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes chip-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-title-chip {
+    animation: none;
+  }
+}

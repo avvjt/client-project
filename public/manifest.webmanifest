@@ -1,0 +1,30 @@
+{
+  "name": "Dispo-Concept — Medical Essentials",
+  "short_name": "Dispo-Concept",
+  "description": "Medical-products business in Bengaluru, India — surgical gowns, procedure kits, 2-ply & 3-ply masks, caps, shoe covers, sterilization wraps and custom packs; supply roles confirmed per order.",
+  "id": "/",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0B1726",
+  "theme_color": "#DA291C",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

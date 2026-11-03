@@ -1,0 +1,200 @@
+// Dispo-Concept platform — domain schema.
+//
+// NOTE (per security review): the scaffold's demo User/Post models were
+// replaced by the actual domain model. SQLite is appropriate for this build's
+// single-node deployment; for production scale, concurrent write workloads and
+// managed backups, migrate to PostgreSQL (documented in the delivery report).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// Request for Quotation — private intake record. Never exposed via any
+/// public read API; access is server-side only.
+model Rfq {
+  id                     String   @id @default(cuid())
+  reference              String   @unique
+  organization           String
+  contactName            String
+  email                  String
+  phone                  String?
+  country                String
+  buyerType              String
+  productCategory        String
+  productCode            String?
+  quantity               String
+  technicalRequirements  String
+  packagingRequirements  String?
+  deliveryTimeframe      String
+  attachmentPath         String?  // randomized name inside .private-uploads (never public)
+  attachmentType         String?
+  attachmentSize         Int?
+  consent                Boolean  @default(false)
+  locale                 String   @default("en")
+  /// Pipeline: NEW → QUALIFICATION → TECHNICAL_REVIEW → QUOTATION →
+  /// NEGOTIATION → WON | LOST → FOLLOW_UP (managed internally).
+  status                 String   @default("NEW")
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+  audits                 AuditEvent[]
+
+  @@index([status, createdAt])
+  @@index([email])
+}
+
+/// Audit trail for important status changes on RFQ records.
+model AuditEvent {
+  id        String   @id @default(cuid())
+  rfqId     String
+  rfq       Rfq      @relation(fields: [rfqId], references: [id], onDelete: Cascade)
+  action    String
+  detail    String?
+  createdAt DateTime @default(now())
+
+  @@index([rfqId, createdAt])
+}
+
+/// Partnership enquiry — intake for the footer "Partner with us" modal
+/// portals (tracks: vendors | rnd | investors | aiTech). Private intake
+/// record; never exposed via any public read API — server-side access only.
+model PartnershipEnquiry {
+  id           String   @id @default(cuid())
+  reference    String   @unique
+  track        String
+  organization String
+  contactName  String
+  email        String
+  phone        String?
+  country      String
+  focus        String
+  message      String
+  consent      Boolean  @default(false)
+  locale       String   @default("en")
+  /// Pipeline: NEW → REVIEW → DUE_DILIGENCE → ACTIVE | ARCHIVED (managed
+  /// internally; no public write path).
+  status       String   @default("NEW")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  audits       PartnershipAuditEvent[]
+
+  @@index([track, createdAt])
+  @@index([email])
+}
+
+/// Audit trail for partnership enquiries (intake + future status changes).
+model PartnershipAuditEvent {
+  id            String              @id @default(cuid())
+  partnershipId String
+  partnership   PartnershipEnquiry  @relation(fields: [partnershipId], references: [id], onDelete: Cascade)
+  action        String
+  detail        String?
+  createdAt     DateTime            @default(now())
+
+  @@index([partnershipId, createdAt])
+}
+
+/// Careers enquiry — intake for the careers page "contact the careers team"
+/// modal portal. Private recruitment record; never exposed via any public
+/// read API — server-side access only. Stores the applicant's self-described
+/// placement intent (placement/area/stage allow-list tokens) plus their
+/// answers to the narrative questions.
+model CareersEnquiry {
+  id        String   @id @default(cuid())
+  reference String   @unique
+  fullName  String
+  email     String
+  phone     String?
+  country   String
+  /// Allow-list token: full-time | internship | early-career | project | introduction
+  placement String
+  /// Allow-list token: production | quality | development | supply | commercial | technology | other
+  area      String
+  /// Allow-list token: student | starting | building | seasoned | returning
+  stage     String
+  spark     String
+  horizon   String?
+  link      String?
+  consent   Boolean  @default(false)
+  locale    String   @default("en")
+  /// Pipeline: NEW → SCREENING → INTERVIEW | ARCHIVED (managed internally;
+  /// no public write path).
+  status    String   @default("NEW")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  audits    CareersAuditEvent[]
+
+  @@index([area, createdAt])
+  @@index([email])
+}
+
+/// Audit trail for careers enquiries (intake + future status changes).
+model CareersAuditEvent {
+  id        String         @id @default(cuid())
+  careersId String
+  careers   CareersEnquiry @relation(fields: [careersId], references: [id], onDelete: Cascade)
+  action    String
+  detail    String?
+  createdAt DateTime       @default(now())
+
+  @@index([careersId, createdAt])
+}
+
+/// Page-level inquiry — intake for the four standalone modal portals on the
+/// Investors ("request an investor discussion"), Technology & AI ("discuss
+/// a collaboration"), Vendors & Suppliers ("start a supplier conversation",
+/// with the all-India state dropdown) and Global Supply (market identified
+/// by country + flag) pages. Private intake record; never exposed via any
+/// public read API — server-side access only.
+model InquiryEnquiry {
+  id           String   @id @default(cuid())
+  reference    String   @unique
+  /// investor | ai | vendor | supply
+  track        String
+  organization String
+  contactName  String
+  email        String
+  phone        String?
+  /// investor | ai | vendor tracks (supply identifies via market)
+  country      String?
+  /// vendor track: INQUIRY_VENDOR_STATES token | "outside-india"
+  state        String?
+  /// supply track: INQUIRY_MARKETS token | "other"
+  market       String?
+  /// supply track: free-text market name when market = "other"
+  marketOther  String?
+  /// investor: relation token | ai: domain token | vendor: category token | supply: sector token
+  focus        String
+  /// investor: horizon token | ai: maturity token | vendor: readiness token
+  stage        String?
+  narrative    String
+  vision       String?
+  link         String?
+  consent      Boolean  @default(false)
+  locale       String   @default("en")
+  /// Pipeline: NEW → QUALIFICATION → DISCUSSION | ARCHIVED (managed
+  /// internally; no public write path).
+  status       String   @default("NEW")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  audits       InquiryAuditEvent[]
+
+  @@index([track, createdAt])
+  @@index([email])
+}
+
+/// Audit trail for page-level inquiries (intake + future status changes).
+model InquiryAuditEvent {
+  id        String          @id @default(cuid())
+  inquiryId String
+  inquiry   InquiryEnquiry  @relation(fields: [inquiryId], references: [id], onDelete: Cascade)
+  action    String
+  detail    String?
+  createdAt DateTime        @default(now())
+
+  @@index([inquiryId, createdAt])
+}

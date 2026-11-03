@@ -1,0 +1,6 @@
+# Security policy — Dispo-Concept Private Limited
+Contact: mailto:dispoconceptpvtltd@gmail.com
+Expires: 2027-10-14T00:00:00.000Z
+Preferred-Languages: en, fr, de, es, nl, ar, zh
+Canonical: https://dispoconceptpvtltd.com/.well-known/security.txt
+Policy: https://dispoconceptpvtltd.com/#/privacy

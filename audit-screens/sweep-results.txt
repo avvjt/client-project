@@ -1,0 +1,18 @@
+{\r\:\company\,\t\:\Company | Dispo-Concept\,\tl\:4827,\sw\:null,\sw2\:1440,\f\:\2902/2902\} | ERR:
+{\r\:\leadership\,\t\:\Leadership & Governance | Dispo-Concept\,\tl\:5558,\sw\:null,\sw2\:1440,\f\:\3640/3640\} | ERR:
+{\r\:\products\,\t\:\Products & Elements | Dispo-Concept\,\tl\:3309,\sw\:null,\sw2\:1440,\f\:\2466/2466\} | ERR:
+{\r\:\quality\,\t\:\Quality & Compliance | Dispo-Concept\,\tl\:4316,\sw\:null,\sw2\:1440,\f\:\2826/2826\} | ERR:
+{\r\:\industries\,\t\:\Industries & Institutions Served | Dispo-Concept\,\tl\:3564,\sw\:null,\sw2\:1440,\f\:\2403/2403\} | ERR:
+{\r\:\capabilities\,\t\:\Manufacturing & Supply Capabilities | Dispo-Concept\,\tl\:4005,\sw\:null,\sw2\:1440,\f\:\2675/2675\} | ERR:
+{\r\:\sustainability\,\t\:\Sustainability & Responsible Operations | Dispo-Concept\,\tl\:3469,\sw\:null,\sw2\:1440,\f\:\2641/2641\} | ERR:
+{\r\:\supply\,\t\:\Global Supply | Dispo-Concept\,\tl\:4841,\sw\:null,\sw2\:1440,\f\:\3810/3810\} | ERR:
+{\r\:\investors\,\t\:\Investors & Strategic Partners | Dispo-Concept\,\tl\:5031,\sw\:null,\sw2\:1440,\f\:\2974/2974\} | ERR:
+{\r\:\vendors\,\t\:\Vendors & Suppliers | Dispo-Concept\,\tl\:3398,\sw\:null,\sw2\:1453,\f\:\2611/2611\} | ERR:
+{\r\:\rnd\,\t\:\R&D & Technical Collaboration | Dispo-Concept\,\tl\:3383,\sw\:null,\sw2\:1440,\f\:\2461/2461\} | ERR:
+{\r\:\careers\,\t\:\Careers | Dispo-Concept\,\tl\:3127,\sw\:null,\sw2\:1440,\f\:\2346/2346\} | ERR:
+{\r\:\ai-tech\,\t\:\Technology & AI Posture | Dispo-Concept\,\tl\:3097,\sw\:null,\sw2\:1440,\f\:\2362/2362\} | ERR:
+{\r\:\contact\,\t\:\Contact & Request for Quotation | Dispo-Concept\,\tl\:3962,\sw\:null,\sw2\:1440,\f\:\2524/2524\} | ERR:
+{\r\:\rfq\,\t\:\Request for Quotation | Dispo-Concept\,\tl\:4015,\sw\:null,\sw2\:1453,\f\:\2524/2524\} | ERR:
+{\r\:\privacy\,\t\:\Privacy Policy | Dispo-Concept\,\tl\:3839,\sw\:null,\sw2\:1440,\f\:\2482/2482\} | ERR:
+{\r\:\terms\,\t\:\Terms & Conditions | Dispo-Concept\,\tl\:3227,\sw\:null,\sw2\:1445,\f\:\2164/2164\} | ERR:
+{\r\:\nonexistent-route\,\t\:\Page Not Found | Dispo-Concept\,\tl\:1841,\sw\:null,\sw2\:1440,\f\:\1244/1244\} | ERR:
